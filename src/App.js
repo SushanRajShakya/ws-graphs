@@ -1,25 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import { Graph, Header } from './components';
+import { GRAPH_TITLE, SUB_TITLE, TITLE } from './constants/label';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header title={TITLE} subTitle={SUB_TITLE} />
+      <Graph title={GRAPH_TITLE} />
     </div>
   );
-}
+};
 
 export default App;

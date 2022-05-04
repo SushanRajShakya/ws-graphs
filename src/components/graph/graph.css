@@ -1,0 +1,19 @@
+.graph-wrapper {
+  padding: 0px 100px;
+}
+
+.graph-history-wrapper {
+  margin: 40px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.graph {
+  padding: 20px 0px;
+  border: 1px solid #e9e9e9;
+}
+
+.graph .title {
+  padding: 0px 30px 20px 20px;
+  border-bottom: 1px solid #e9e9e9;
+}
