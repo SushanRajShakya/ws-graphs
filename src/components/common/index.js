@@ -1,3 +1,3 @@
-import GraphHistory from './graphHistory';
+import LegendCard from './legendCard';
 
-export { GraphHistory };
+export { LegendCard };

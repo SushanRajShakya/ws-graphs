@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 const success = (data) => {
   const { message, toastId } = data;
 
-  console.log(data);
   toast.dismiss(toastId);
   toast.success(message, { toastId });
 };

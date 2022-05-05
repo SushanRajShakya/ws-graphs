@@ -1,4 +1,4 @@
-import Graph from './graph';
 import Header from './header';
+import LineChart from './lineChart';
 
-export { Header, Graph };
+export { Header, LineChart };

@@ -1,19 +1,19 @@
-.graph-wrapper {
+.chart-wrapper {
   padding: 0px 350px;
 }
 
-.graph-history-wrapper {
+.chart-legend-wrapper {
   margin: 40px 0px;
   display: flex;
   justify-content: space-between;
 }
 
-.graph {
+.chart {
   padding: 20px 0px;
   border: 1px solid #e9e9e9;
 }
 
-.graph .title {
+.chart .title {
   padding: 0px 30px 20px 20px;
   border-bottom: 1px solid #e9e9e9;
 }

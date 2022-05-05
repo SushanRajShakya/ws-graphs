@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
 
-import './graphHistory.css';
+import './legendCard.css';
 
-const GraphHistory = ({ title, label, data }) => {
+const LegendCard = ({ title, label, data }) => {
   return (
-    <div className="graph-history">
+    <div className="legend-card">
       <span className="title">{title}</span>
       <span className="detail">{`${label}: ${data}`}</span>
     </div>
   );
 };
 
-GraphHistory.propTypes = {
+LegendCard.propTypes = {
   title: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   data: PropTypes.string.isRequired,
 };
 
-export default GraphHistory;
+export default LegendCard;
