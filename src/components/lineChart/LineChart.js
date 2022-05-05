@@ -92,7 +92,6 @@ const LineChart = ({ title }) => {
 };
 
 const _handleData = ({ data, data1, data2, setData1, setData2 }) => {
-  console.log(data);
   data.forEach((item, index) => {
     if (item.data <= lineChartConfig.upperDataThreshold) {
       const currentDataSet = index === 0 ? data1 : data2;
