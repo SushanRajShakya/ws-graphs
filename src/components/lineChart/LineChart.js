@@ -8,8 +8,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LegendCard } from '../common';
 import envConfig from '../../envConfig';
@@ -17,10 +18,10 @@ import socketConfig from '../../config/socket';
 import { lineChartConfig } from '../../config';
 import { notificationService } from '../../services';
 import webSocketService from '../../services/webSocket';
+import { legendLabels, TEMP } from '../../constants/label';
 import { socketNotification } from '../../constants/notifications';
 
 import './lineChart.css';
-import { legendLabels } from '../../constants/label';
 
 Chart.register(
   CategoryScale,
@@ -82,8 +83,8 @@ const LineChart = ({ title }) => {
         <Line
           options={lineChartConfig.options}
           data={{
-            labels: _getChartLabels(data1, data2),
-            datasets: _getChartData(data1, data2),
+            labels: _prepareChartLabels(data1, data2),
+            datasets: _prepareChartData(data1, data2),
           }}
         />
       </div>
@@ -91,6 +92,11 @@ const LineChart = ({ title }) => {
   );
 };
 
+/**
+ * Handle data received from socket.
+ *
+ * @param {object}
+ */
 const _handleData = ({ data, data1, data2, setData1, setData2 }) => {
   data.forEach((item, index) => {
     if (item.data <= lineChartConfig.upperDataThreshold) {
@@ -102,6 +108,12 @@ const _handleData = ({ data, data1, data2, setData1, setData2 }) => {
   });
 };
 
+/**
+ * Sanitizes the data set so that data displayed has value less than 100 and within 5 min time range.
+ *
+ * @param {Array<object>} data
+ * @returns {Array<object>}
+ */
 const _sanitizeData = (data) => {
   if (data.length > 1) {
     let breakpointIndex = 0;
@@ -125,6 +137,12 @@ const _sanitizeData = (data) => {
   return data;
 };
 
+/**
+ * Hanldes socket close and reinitiate socket connection if error.
+ *
+ * @param {object} event
+ * @param {function} setSocket
+ */
 const _handleSocketClose = (event, setSocket) => {
   event.wasClean
     ? notificationService.success(socketNotification.disconnected)
@@ -139,12 +157,26 @@ const _handleSocketClose = (event, setSocket) => {
   }
 };
 
-const _getChartLabels = (data1, data2) =>
+/**
+ * Get empty strings for labels as it is required for line chart.
+ *
+ * @param {Array<object>} data1
+ * @param {Array<object>} data2
+ * @returns {Array<string>}
+ */
+const _prepareChartLabels = (data1, data2) =>
   Array(data1.length > data2.length ? data1.length : data2.length)
     .join('.')
     .split('.');
 
-const _getChartData = (data1, data2) => [
+/**
+ * Get chart data.
+ *
+ * @param {Array<object>} data1
+ * @param {Array<object>} data2
+ * @returns {Array<object>}
+ */
+const _prepareChartData = (data1, data2) => [
   {
     data: data1.map((item) => item.data),
     ...lineChartConfig.legendOptions.dataSet1,
@@ -155,7 +187,14 @@ const _getChartData = (data1, data2) => [
   },
 ];
 
-const _getTemperatureCard = (data, title, label) => (
+/**
+ * Returns Temperature Card component.
+ *
+ * @param {object} data
+ * @param {string} title
+ * @returns {Component}
+ */
+const _getTemperatureCard = (data, title) => (
   <>
     {!!data.length &&
       data
@@ -164,11 +203,15 @@ const _getTemperatureCard = (data, title, label) => (
           <LegendCard
             key={index}
             title={title}
-            label={'Temp'}
+            label={TEMP}
             data={`${item.temperature} C`}
           />
         ))}
   </>
 );
+
+LineChart.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default LineChart;

@@ -1,6 +1,12 @@
 import notificationService from './notification';
 import { socketNotification } from '../constants/notifications';
 
+/**
+ * Initiates socket and displays toast message for success.
+ *
+ * @param {string} url
+ * @returns {object} <WebSocket>
+ */
 const initiateSocket = (url) => {
   const socket = new WebSocket(url);
 
