@@ -1,6 +1,6 @@
 ## Create an env varibale (.env), have a look at the example env file (.env.example)
 
-## Save the env file
+Save the env file
 
 ## Install the necessary dependencies by running the following command
 
